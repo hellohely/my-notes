@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
   return (
     <form
@@ -19,7 +21,7 @@ export function Login() {
         } catch (error) {
           console.log(error);
         }
-        //navigate("/userpage");
+        navigate("/editor");
       } )}>
       <h1>Logga in</h1>
       <input {...register("username")} placeholder="Användarnamn" />

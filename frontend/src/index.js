@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Login } from "./components/login";
+import DocumentEditor from './components/documenteditor';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,6 +13,7 @@ root.render(
     <BrowserRouter>
       <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/editor" element={<DocumentEditor />} />
       </Routes>
     </BrowserRouter>
     

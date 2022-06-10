@@ -37,9 +37,9 @@ app.post("/authorization", function (req, res) {
 
   //Check if entered user credentials are the same as mock user
   if (req.body.username == username && req.body.password == password) {
-    return res.cookie("userId", "12345");
+    res.cookie("userId", "12345");
+    return res.send("Hellllooooo")
   }
-
   res.status("401");
   res.send("Invalid logon credentials");
 });
