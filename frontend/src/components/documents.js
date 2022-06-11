@@ -1,7 +1,21 @@
 import { useState, useEffect } from "react";
+import Cookies from "universal-cookie";
+import {Link} from 'react-router-dom';
 
-export function DocumentsMenu() {
+export function Documents() {
+    const cookies = new Cookies();
+    let userId = cookies.get("userId");
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    useEffect(() => {
+        if (userId === "12345") {
+          setLoggedIn(true);
+        }
+      }, [userId]);
+
   const [documents, setDocuments] = useState([]);
+
+
 
   useEffect(() => {
     async function getUserData() {
@@ -36,10 +50,22 @@ let lis = documents.map((document, i) => {
 
   return (
     <>
+    {loggedIn && (
+        <>
       <h1>Here are your documents</h1>
       <ul>
         {lis}
       </ul>
+      <Link to="/editor">Create new document</Link>
+
+      </>
+      )}
+        {!loggedIn && (
+        <>
+          {" "}
+          <h1>Inte inloggad</h1>{" "}
+        </>
+      )}
     </>
   );
 }

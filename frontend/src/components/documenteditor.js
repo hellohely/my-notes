@@ -1,12 +1,14 @@
 import { Editor } from "@tinymce/tinymce-react";
 import React, { useState, useEffect, useRef } from "react";
 import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function DocumentEditor() {
   const cookies = new Cookies();
   let userId = cookies.get("userId");
   const [loggedIn, setLoggedIn] = useState(false);
-  console.log(loggedIn);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (userId === "12345") {
@@ -33,6 +35,7 @@ export default function DocumentEditor() {
       } catch (error) {
         console.log(error);
       }
+      navigate("/documents");
     }
   };
 

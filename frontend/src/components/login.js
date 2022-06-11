@@ -1,9 +1,24 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
+import React, { useState, useEffect } from "react";
 
 export function Login() {
+  const cookies = new Cookies();
+  let userId = cookies.get("userId");
+  const [loggedIn, setLoggedIn] = useState(false);
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
+
+    useEffect(() => {
+      if (userId === "12345") {
+        setLoggedIn(true);
+      }
+    }, [userId]);
+
+    if(loggedIn) {
+      navigate("/documents")
+    }
 
   return (
     <form
@@ -21,12 +36,12 @@ export function Login() {
         } catch (error) {
           console.log(error);
         }
-        navigate("/editor");
+        navigate("/documents");
       } )}>
-      <h1>Logga in</h1>
-      <input {...register("username")} placeholder="Användarnamn" />
-      <input type="password" {...register("password")} placeholder="Lösenord" />
-      <input type="submit" value="Logga in" />
+      <h1>Log in</h1>
+      <input {...register("username")} placeholder="Username" />
+      <input type="password" {...register("password")} placeholder="Password" />
+      <input type="submit" value="Log in" />
     </form>
   );
 }
