@@ -30,6 +30,25 @@ app.locals.con = mysql.createConnection({
   database: "my-documents",
 });
 
+//Get documents from db
+app.get("/getDocuments", function (req, res) {
+  req.app.locals.con.connect(function (err) {
+    if (err) {
+      console.log(err);
+    }
+
+    let sql = `SELECT * FROM documents`
+
+    req.app.locals.con.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+      console.log("resultat: " + result);
+      res.send(result)
+    });
+  });
+});
+
 //Post document to db
 app.post("/saveDocument", function (req, res) {
   req.app.locals.con.connect(function (err) {
@@ -38,7 +57,7 @@ app.post("/saveDocument", function (req, res) {
     }
 
     let documentTitle = req.body.title;
-    let documentContent = req.body.content
+    let documentContent = req.body.content;
     let sql = `INSERT INTO documents (title, content) VALUES ("${documentTitle}", "${documentContent}")`;
     req.app.locals.con.query(sql, function (err, result) {
       if (err) {

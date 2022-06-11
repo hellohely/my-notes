@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 import { Login } from "./components/login";
 import DocumentEditor from './components/documenteditor';
+import { DocumentsMenu } from './components/documentsMenu';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +15,7 @@ root.render(
       <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/editor" element={<DocumentEditor />} />
+      <Route path="/documents" element={<DocumentsMenu />} />
       </Routes>
     </BrowserRouter>
     
