@@ -19,7 +19,7 @@ export default function DocumentEditor() {
   const save = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
-      let title = "Testtitel";
+      let title = document.getElementById("documentTitle").value;
       let content = editorRef.current.getContent();
       let data = { title: title, content: content };
 
@@ -76,6 +76,7 @@ export default function DocumentEditor() {
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
           />
+          <p>Document name: </p><input type="text" id="documentTitle"></input><br/>
           <button onClick={save}>Save document</button>
         </>
       )}
