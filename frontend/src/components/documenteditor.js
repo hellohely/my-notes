@@ -19,6 +19,20 @@ export default function DocumentEditor() {
   const save = () => {
     if (editorRef.current) {
       console.log(editorRef.current.getContent());
+      let title = "Testtitel";
+      let content = editorRef.current.getContent();
+      let data = { title: title, content: content };
+
+      try {
+        fetch("http://localhost:3000/saveDocument", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(data),
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
