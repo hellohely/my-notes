@@ -5,3 +5,13 @@ Content-Type: application/json
     "username" : "username",
     "password" : "password"
 }
+
+###
+
+POST http://localhost:3000/saveDocument
+Content-Type: application/json
+
+{
+    "title" : "Testdokument nummer 3",
+    "content" : "<h1>Goodbye World</h1>"
+}

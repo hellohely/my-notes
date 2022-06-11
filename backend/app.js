@@ -7,6 +7,7 @@ var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const { equal } = require("assert");
 
 var app = express();
 
@@ -21,13 +22,32 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 //Connect to mysql db
-// app.locals.con = mysql.createConnection({
-//     host: "",
-//     port: "",
-//     user: "",
-//     password: "",
-//     database: "",
-// })
+app.locals.con = mysql.createConnection({
+  host: "localhost",
+  port: "3306",
+  user: "my-documents",
+  password: "my-documents",
+  database: "my-documents",
+});
+
+//Post document to db
+app.post("/saveDocument", function (req, res) {
+  req.app.locals.con.connect(function (err) {
+    if (err) {
+      console.log(err);
+    }
+
+    let documentTitle = req.body.title;
+    let documentContent = req.body.content
+    let sql = `INSERT INTO documents (title, content) VALUES ("${documentTitle}", "${documentContent}")`;
+    req.app.locals.con.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+      console.log("resultat: " + result);
+    });
+  });
+});
 
 //User login
 app.post("/authorization", function (req, res) {
@@ -38,7 +58,7 @@ app.post("/authorization", function (req, res) {
   //Check if entered user credentials are the same as mock user
   if (req.body.username == username && req.body.password == password) {
     res.cookie("userId", "12345");
-    return res.send("Hellllooooo")
+    return res.send("Hellllooooo");
   }
   res.status("401");
   res.send("Invalid logon credentials");
