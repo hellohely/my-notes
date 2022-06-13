@@ -18,15 +18,12 @@ export function Document() {
     setDocument(found);
   }
 
- 
-
   useEffect(() => {
     if (params.id) {
       setDocumentId(parseInt(params.id));
       findDocument();
     }
   }, [documentId]);
-  
 
   //console.log(documentId);
   //console.log(documents);
@@ -35,7 +32,7 @@ export function Document() {
   return (
     <>
       <h1>Document ID: {params.id}</h1>
-      <p>{document?.content}</p>
+      <div dangerouslySetInnerHTML={{ __html: document?.content }} />
     </>
   );
 }
