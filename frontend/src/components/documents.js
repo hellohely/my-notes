@@ -26,16 +26,30 @@ export function Documents() {
           credentials: "include",
         });
         const json = await response.json();
+        cookies.set("documents", json)
+
+
+        
 
         //console.log(json);
         setDocuments(json);
+        
         
       } catch (error) {
         console.log(error);
       }
     }
     getUserData();
+    
+ 
   }, []);
+
+
+  function contentCookie(id) {
+    //let documentContent = documents.find(id);
+    //console.log(documentContent);
+    console.log(id);
+  }
 
 //Create html <li> elements of the documents
 let lis = documents.map((document, i) => {
@@ -43,6 +57,7 @@ let lis = documents.map((document, i) => {
         <li key={i}>
             <p>{document.title}</p>
             <p>{document.created}</p>
+            <Link to={`${document.documentId}`} onClick={contentCookie(document.documentId)}>Preview document</Link>
         </li>
     );
 });
