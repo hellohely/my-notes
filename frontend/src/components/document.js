@@ -3,39 +3,39 @@ import Cookies from "universal-cookie";
 import { useState, useEffect } from "react";
 
 export function Document() {
-    const cookies = new Cookies();
-    let documents = cookies.get("documents");
+  const cookies = new Cookies();
+  let documents = cookies.get("documents");
 
-    //const [document, setDocument] = useState({});
+  //const [document, setDocument] = useState({});
 
-    const [documentId, setDocumentId] = useState(0);
-    let params = useParams();
+  const [documentId, setDocumentId] = useState(0);
+  const [document, setDocument] = useState({});
+  let params = useParams();
 
-    useEffect(() => {
-        if (params.id) {
-            setDocumentId(parseInt(params.id));
-        }
-    }, [documentId]);
+  function findDocument() {
+    let found = documents.find((element) => element.documentId == documentId);
 
-
-   
-
-    console.log(documentId);
-    console.log(documents);
-
-
-   
-   
-
-    // useEffect(() => {
-    //     setDocument(thisDocument);
-    //     console.log(thisDocument); //renders as undefined
-    //   }, [documentId]);
-
- 
-    
+    setDocument(found);
+  }
 
  
 
-    return(<><h1>Document heeere: {params.id}</h1></>)
+  useEffect(() => {
+    if (params.id) {
+      setDocumentId(parseInt(params.id));
+      findDocument();
+    }
+  }, [documentId]);
+  
+
+  //console.log(documentId);
+  //console.log(documents);
+  //console.log(document);
+
+  return (
+    <>
+      <h1>Document ID: {params.id}</h1>
+      <p>{document?.content}</p>
+    </>
+  );
 }
