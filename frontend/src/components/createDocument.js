@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Cookies from "universal-cookie";
 import { useNavigate } from "react-router-dom";
 
-export default function DocumentEditor() {
+export default function CreateDocument() {
   const cookies = new Cookies();
   let userId = cookies.get("userId");
   const [loggedIn, setLoggedIn] = useState(false);

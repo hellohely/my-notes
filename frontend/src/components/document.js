@@ -31,7 +31,7 @@ export function Document() {
 
   return (
     <>
-      <h1>Document ID: {params.id}</h1>
+      <h1>{document?.title}</h1>
       <div dangerouslySetInnerHTML={{ __html: document?.content }} />
     </>
   );

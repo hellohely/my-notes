@@ -5,9 +5,10 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import { Login } from "./components/login";
-import DocumentEditor from './components/documenteditor';
+import CreateDocument from './components/createDocument';
 import { Documents } from './components/documents';
 import { Document } from './components/document';
+import { EditDocument } from './components/editDocument';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,9 +16,11 @@ root.render(
     <BrowserRouter>
       <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/editor" element={<DocumentEditor />} />
+      <Route path="/editor" element={<CreateDocument />} />
       <Route path="/documents" element={<Documents />} />
       <Route path="/documents/:id" element={<Document/>} />
+      <Route path="/edit" element={<EditDocument/>} />
+      
       </Routes>
     </BrowserRouter>
     
