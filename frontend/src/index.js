@@ -19,7 +19,7 @@ root.render(
       <Route path="/editor" element={<CreateDocument />} />
       <Route path="/documents" element={<Documents />} />
       <Route path="/documents/:id" element={<Document/>} />
-      <Route path="/edit" element={<EditDocument/>} />
+      <Route path="/edit/:id" element={<EditDocument/>} />
       
       </Routes>
     </BrowserRouter>

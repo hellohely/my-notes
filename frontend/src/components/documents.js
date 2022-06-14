@@ -27,7 +27,6 @@ export function Documents() {
         if (loggedIn) {
           cookies.set("documents", json);
         }
-        
 
         //console.log(json);
         setDocuments(json);
@@ -38,26 +37,15 @@ export function Documents() {
     getUserData();
   }, [loggedIn]);
 
-  function contentCookie(id) {
-    //let documentContent = documents.find(id);
-    //console.log(documentContent);
-    console.log(id);
-  }
-
   //Create html <li> elements of the documents
   let lis = documents.map((document, i) => {
     return (
       <li key={i}>
         <p>{document.title}</p>
         <p>{document.created}</p>
-        <Link
-          to={`${document.documentId}`}
-          onClick={contentCookie(document.documentId)}
-        >
-          Preview document
-        </Link>
+        <Link to={`${document.documentId}`}>Preview document</Link>
         <br />
-        <Link to={"/edit"}>Edit document</Link>
+        <Link to={`/edit/${document.documentId}`}>Edit document</Link>
       </li>
     );
   });
