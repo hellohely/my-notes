@@ -13,6 +13,10 @@ export function Documents() {
     }
   }, [userId]);
 
+  function logOut() {
+    //console.log("logga ut");
+  }
+
   const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
@@ -57,6 +61,8 @@ export function Documents() {
           <h1>Here are your documents</h1>
           <ul>{lis}</ul>
           <Link to="/editor">Create new document</Link>
+          <br />
+          <button onClick={logOut()}>Log Out</button>
         </>
       )}
       {!loggedIn && (

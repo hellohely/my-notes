@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Editor } from "@tinymce/tinymce-react";
 import Cookies from "universal-cookie";
 import { useState, useEffect, useRef } from "react";
@@ -6,6 +6,8 @@ import { useState, useEffect, useRef } from "react";
 export function EditDocument() {
     const cookies = new Cookies();
     let documents = cookies.get("documents");
+
+    const navigate = useNavigate();
 
     const editorRef = useRef(null);
   
@@ -25,6 +27,28 @@ export function EditDocument() {
         findDocument();
       }
     }, [documentId]);
+
+    const save = () => {
+        if (editorRef.current) {
+          console.log(editorRef.current.getContent());
+          //let title = document.getElementById("documentTitle").value;
+          let content = editorRef.current.getContent();
+          let id = params.id;
+          let data = { id: id, content: content };
+    
+          try {
+            fetch("http://localhost:3000/updateDocument", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              body: JSON.stringify(data),
+            });
+          } catch (error) {
+            console.log(error);
+          }
+          //navigate("/documents");
+        }
+      };
 
     return(
         <>
@@ -66,7 +90,7 @@ export function EditDocument() {
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
             }}
           />
-          <button>Save document</button>
+          <button onClick={save}>Save document</button>
         </></>
     )
 }

@@ -68,6 +68,25 @@ app.post("/saveDocument", function (req, res) {
   });
 });
 
+app.post("/updateDocument", function (req, res) {
+  req.app.locals.con.connect(function (err) {
+    if (err) {
+      console.log(err);
+    }
+
+    let documentId = req.body.id;
+    let documentContent = req.body.content;
+    let sql = `UPDATE documents SET content = '${documentContent}' WHERE documentId = ${documentId}`;
+    req.app.locals.con.query(sql, function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+      console.log("resultat: " + result);
+    });
+  });
+
+});
+
 //User login
 app.post("/authorization", function (req, res) {
   //Create mock user

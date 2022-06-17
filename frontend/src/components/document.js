@@ -6,8 +6,6 @@ export function Document() {
   const cookies = new Cookies();
   let documents = cookies.get("documents");
 
-  //const [document, setDocument] = useState({});
-
   const [documentId, setDocumentId] = useState(0);
   const [document, setDocument] = useState({});
   let params = useParams();
