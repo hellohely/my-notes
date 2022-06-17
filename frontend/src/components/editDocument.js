@@ -30,8 +30,7 @@ export function EditDocument() {
 
     const save = () => {
         if (editorRef.current) {
-          console.log(editorRef.current.getContent());
-          //let title = document.getElementById("documentTitle").value;
+          //console.log(editorRef.current.getContent());
           let content = editorRef.current.getContent();
           let id = params.id;
           let data = { id: id, content: content };
@@ -46,7 +45,7 @@ export function EditDocument() {
           } catch (error) {
             console.log(error);
           }
-          //navigate("/documents");
+          navigate("/documents");
         }
       };
 

@@ -14,7 +14,6 @@ export function Documents() {
   }, [userId]);
 
   function logOut() {
-    //console.log("logga ut");
   }
 
   const [documents, setDocuments] = useState([]);

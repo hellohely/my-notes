@@ -23,9 +23,9 @@ export function Document() {
     }
   }, [documentId]);
 
-  //console.log(documentId);
-  //console.log(documents);
-  //console.log(document);
+  console.log(documentId);
+  console.log(documents);
+  console.log(document);
 
   return (
     <>

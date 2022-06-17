@@ -56,9 +56,9 @@ app.post("/saveDocument", function (req, res) {
       console.log(err);
     }
 
-    let documentTitle = req.body.title;
-    let documentContent = req.body.content;
-    let sql = `INSERT INTO documents (title, content) VALUES ("${documentTitle}", "${documentContent}")`;
+    let documentTitle = req.app.locals.con.escape(req.body.title);
+    let documentContent = req.app.locals.con.escape(req.body.content);
+    let sql = `INSERT INTO documents (title, content) VALUES (${documentTitle}, ${documentContent})`;
     req.app.locals.con.query(sql, function (err, result) {
       if (err) {
         console.log(err);
@@ -74,9 +74,9 @@ app.post("/updateDocument", function (req, res) {
       console.log(err);
     }
 
-    let documentId = req.body.id;
-    let documentContent = req.body.content;
-    let sql = `UPDATE documents SET content = '${documentContent}' WHERE documentId = ${documentId}`;
+    let documentId = req.app.locals.con.escape(req.body.id);
+    let documentContent = req.app.locals.con.escape(req.body.content);
+    let sql = `UPDATE documents SET content = ${documentContent} WHERE documentId = ${documentId}`;
     req.app.locals.con.query(sql, function (err, result) {
       if (err) {
         console.log(err);
